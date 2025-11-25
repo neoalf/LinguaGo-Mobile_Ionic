@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { Redirect, Route } from 'react-router-dom';
 import { IonApp, IonRouterOutlet, setupIonicReact } from '@ionic/react';
 import { IonReactRouter } from '@ionic/react-router';
@@ -12,8 +12,8 @@ import Dashboard from './pages/Dashboard';
 import Profile from './pages/Profile';
 import Course from './pages/Course';
 
-// Services
-import { AuthService } from './services/auth.service';
+// Context
+import { AuthProvider, useAuth } from './contexts/AuthContext';
 
 /* Core CSS required for Ionic components to work properly */
 import '@ionic/react/css/core.css';
@@ -39,31 +39,11 @@ import './theme/variables.css';
 
 setupIonicReact();
 
-const App: React.FC = () => {
-  const [isAuthenticated, setIsAuthenticated] = useState<boolean | null>(null);
-
-  useEffect(() => {
-    initializeApp();
-  }, []);
-
-  const initializeApp = async () => {
-    // Check authentication status
-    const authenticated = await AuthService.isAuthenticated();
-    setIsAuthenticated(authenticated);
-
-    // Hide splash screen
-    await SplashScreen.hide();
-
-    // Configure status bar
-    try {
-      await StatusBar.setStyle({ style: Style.Light });
-    } catch (error) {
-      console.log('Status bar not available');
-    }
-  };
+const AppRoutes: React.FC = () => {
+  const { isAuthenticated, loading } = useAuth();
 
   // Show loading while checking auth
-  if (isAuthenticated === null) {
+  if (loading) {
     return <IonApp></IonApp>;
   }
 
@@ -97,6 +77,30 @@ const App: React.FC = () => {
         </IonRouterOutlet>
       </IonReactRouter>
     </IonApp>
+  );
+};
+
+const App: React.FC = () => {
+  useEffect(() => {
+    initializeApp();
+  }, []);
+
+  const initializeApp = async () => {
+    // Hide splash screen
+    await SplashScreen.hide();
+
+    // Configure status bar
+    try {
+      await StatusBar.setStyle({ style: Style.Light });
+    } catch (error) {
+      console.log('Status bar not available');
+    }
+  };
+
+  return (
+    <AuthProvider>
+      <AppRoutes />
+    </AuthProvider>
   );
 };
 

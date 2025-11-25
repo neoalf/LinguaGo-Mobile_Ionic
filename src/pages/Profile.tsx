@@ -23,16 +23,18 @@ import {
 import { saveOutline, personOutline, mailOutline, globeOutline } from 'ionicons/icons';
 import { useHistory } from 'react-router-dom';
 import { AuthService } from '../services/auth.service';
+import { useAuth } from '../contexts/AuthContext';
 import { User } from '../types/user.types';
 import './Profile.css';
 
 const Profile: React.FC = () => {
     const history = useHistory();
-    const [user, setUser] = useState<User | null>(null);
+    const { user: authUser, updateUser: updateAuthUser } = useAuth();
+    const [user, setUser] = useState<User | null>(authUser);
     const [editMode, setEditMode] = useState(false);
     const [formData, setFormData] = useState({
-        name: '',
-        country: '',
+        name: authUser?.name || '',
+        country: authUser?.country || '',
     });
     const [loading, setLoading] = useState(false);
     const [toast, setToast] = useState<{ show: boolean; message: string; color: string }>({
@@ -42,21 +44,14 @@ const Profile: React.FC = () => {
     });
 
     useEffect(() => {
-        loadUser();
-    }, []);
-
-    const loadUser = async () => {
-        const currentUser = await AuthService.getCurrentUser();
-        if (!currentUser) {
-            history.replace('/login');
-        } else {
-            setUser(currentUser);
+        if (authUser) {
+            setUser(authUser);
             setFormData({
-                name: currentUser.name,
-                country: currentUser.country || '',
+                name: authUser.name,
+                country: authUser.country || '',
             });
         }
-    };
+    }, [authUser]);
 
     const handleSave = async () => {
         if (!user) return;
@@ -79,6 +74,7 @@ const Profile: React.FC = () => {
             });
 
             setUser(updatedUser);
+            updateAuthUser(updatedUser); // Update auth context
             setEditMode(false);
             setToast({
                 show: true,

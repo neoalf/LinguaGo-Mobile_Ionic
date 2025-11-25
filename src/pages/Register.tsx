@@ -15,10 +15,12 @@ import {
 import { mailOutline, lockClosedOutline, personOutline, globeOutline } from 'ionicons/icons';
 import { useHistory } from 'react-router-dom';
 import { AuthService } from '../services/auth.service';
+import { useAuth } from '../contexts/AuthContext';
 import './Register.css';
 
 const Register: React.FC = () => {
     const history = useHistory();
+    const { login: setAuthUser } = useAuth();
     const [formData, setFormData] = useState({
         name: '',
         email: '',
@@ -100,6 +102,12 @@ const Register: React.FC = () => {
                 password: formData.password,
                 country: formData.country,
             });
+
+            // Get the newly created user and update auth context
+            const user = await AuthService.getCurrentUser();
+            if (user) {
+                setAuthUser(user);
+            }
 
             setToast({
                 show: true,

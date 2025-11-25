@@ -64,6 +64,8 @@
 
 .custom-input {
   --background: #f5f5f5;
+  --color: #1b3a47;
+  --placeholder-color: #999;
   --padding-start: 45px;
   --padding-end: 12px;
   --border-radius: 12px;

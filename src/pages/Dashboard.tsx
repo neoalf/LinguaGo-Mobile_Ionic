@@ -19,34 +19,28 @@ import {
 } from '@ionic/react';
 import { personCircleOutline, logOutOutline, bookOutline } from 'ionicons/icons';
 import { useHistory } from 'react-router-dom';
-import { AuthService } from '../services/auth.service';
+import { useAuth } from '../contexts/AuthContext';
 import { User } from '../types/user.types';
 import './Dashboard.css';
 
 const Dashboard: React.FC = () => {
     const history = useHistory();
-    const [user, setUser] = useState<User | null>(null);
+    const { user: authUser, logout: authLogout } = useAuth();
+    const [user, setUser] = useState<User | null>(authUser);
 
     useEffect(() => {
-        loadUser();
-    }, []);
-
-    const loadUser = async () => {
-        const currentUser = await AuthService.getCurrentUser();
-        if (!currentUser) {
-            history.replace('/login');
-        } else {
-            setUser(currentUser);
+        if (authUser) {
+            setUser(authUser);
         }
-    };
+    }, [authUser]);
 
     const handleRefresh = async (event: CustomEvent) => {
-        await loadUser();
+        // User data is already managed by AuthContext
         event.detail.complete();
     };
 
     const handleLogout = async () => {
-        await AuthService.logout();
+        await authLogout();
         history.replace('/login');
     };
 

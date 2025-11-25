@@ -13,10 +13,12 @@ import {
 import { mailOutline, lockClosedOutline, personOutline } from 'ionicons/icons';
 import { useHistory } from 'react-router-dom';
 import { AuthService } from '../services/auth.service';
+import { useAuth } from '../contexts/AuthContext';
 import './Login.css';
 
 const Login: React.FC = () => {
     const history = useHistory();
+    const { login: setAuthUser } = useAuth();
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [loading, setLoading] = useState(false);
@@ -51,7 +53,11 @@ const Login: React.FC = () => {
         setLoading(true);
 
         try {
-            await AuthService.login({ email, password });
+            const user = await AuthService.login({ email, password });
+
+            // Update auth context - this triggers the redirect
+            setAuthUser(user);
+
             setToast({
                 show: true,
                 message: '¡Bienvenido a LinguaGo!',
