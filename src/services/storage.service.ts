@@ -2,8 +2,8 @@ import { Preferences } from '@capacitor/preferences';
 import { User } from '../types/user.types';
 
 /**
- * Storage Service
- * Handles local data persistence using Capacitor Preferences
+ * Servicio de Almacenamiento
+ * Maneja la persistencia de datos locales usando Capacitor Preferences
  */
 
 const STORAGE_KEYS = {
@@ -14,7 +14,7 @@ const STORAGE_KEYS = {
 
 export const StorageService = {
     /**
-     * Save user data to local storage
+     * Guardar datos de usuario en almacenamiento local
      */
     async saveUser(user: User): Promise<void> {
         await Preferences.set({
@@ -28,7 +28,7 @@ export const StorageService = {
     },
 
     /**
-     * Get user data from local storage
+     * Obtener datos de usuario del almacenamiento local
      */
     async getUser(): Promise<User | null> {
         const { value } = await Preferences.get({ key: STORAGE_KEYS.USER });
@@ -36,7 +36,7 @@ export const StorageService = {
     },
 
     /**
-     * Check if user is logged in
+     * Verificar si el usuario ha iniciado sesión
      */
     async isLoggedIn(): Promise<boolean> {
         const { value } = await Preferences.get({ key: STORAGE_KEYS.IS_LOGGED_IN });
@@ -44,7 +44,7 @@ export const StorageService = {
     },
 
     /**
-     * Clear all user data (logout)
+     * Limpiar todos los datos de usuario (cerrar sesión)
      */
     async clearUser(): Promise<void> {
         await Preferences.remove({ key: STORAGE_KEYS.USER });
@@ -53,7 +53,7 @@ export const StorageService = {
     },
 
     /**
-     * Update user data in storage
+     * Actualizar datos de usuario en almacenamiento
      */
     async updateUser(userData: Partial<User>): Promise<void> {
         const currentUser = await this.getUser();

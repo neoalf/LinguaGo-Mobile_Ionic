@@ -3,13 +3,13 @@ import ApiService from './api.service';
 import { StorageService } from './storage.service';
 
 /**
- * Authentication Service
- * Manages user authentication state and operations
+ * Servicio de Autenticación
+ * Gestiona el estado y operaciones de autenticación del usuario
  */
 
 export const AuthService = {
     /**
-     * Login user with credentials
+     * Iniciar sesión con credenciales
      */
     async login(credentials: LoginCredentials): Promise<User> {
         try {
@@ -22,13 +22,13 @@ export const AuthService = {
     },
 
     /**
-     * Register new user
+     * Registrar nuevo usuario
      */
     async register(data: RegisterData): Promise<void> {
         try {
             const response = await ApiService.register(data);
             if (response.success) {
-                // Auto-login after registration
+                // Inicio de sesión automático después del registro
                 await this.login({
                     email: data.email,
                     password: data.password,
@@ -40,28 +40,28 @@ export const AuthService = {
     },
 
     /**
-     * Logout user
+     * Cerrar sesión del usuario
      */
     async logout(): Promise<void> {
         await StorageService.clearUser();
     },
 
     /**
-     * Get current logged in user
+     * Obtener usuario actualmente autenticado
      */
     async getCurrentUser(): Promise<User | null> {
         return await StorageService.getUser();
     },
 
     /**
-     * Check if user is authenticated
+     * Verificar si el usuario está autenticado
      */
     async isAuthenticated(): Promise<boolean> {
         return await StorageService.isLoggedIn();
     },
 
     /**
-     * Update user profile
+     * Actualizar perfil del usuario
      */
     async updateProfile(userId: number, data: Partial<User>): Promise<User> {
         try {
@@ -77,7 +77,7 @@ export const AuthService = {
     },
 
     /**
-     * Update language progress
+     * Actualizar progreso de idiomas
      */
     async updateProgress(
         userId: number,
@@ -92,7 +92,7 @@ export const AuthService = {
                 progressRussian,
             });
 
-            // Update local storage
+            // Actualizar almacenamiento local
             await StorageService.updateUser({
                 progressEnglish,
                 progressFrench,
@@ -104,7 +104,7 @@ export const AuthService = {
     },
 
     /**
-     * Reset user password
+     * Restablecer contraseña del usuario
      */
     async resetPassword(email: string, newPassword: string): Promise<void> {
         try {

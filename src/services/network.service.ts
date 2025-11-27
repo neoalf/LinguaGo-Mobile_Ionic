@@ -1,13 +1,13 @@
 import { Network } from '@capacitor/network';
 
 /**
- * Network Service
- * Monitors network connectivity status
+ * Servicio de Red
+ * Monitorea el estado de conectividad de red
  */
 
 export const NetworkService = {
     /**
-     * Get current network status
+     * Obtener estado actual de la red
      */
     async getStatus(): Promise<boolean> {
         const status = await Network.getStatus();
@@ -15,7 +15,7 @@ export const NetworkService = {
     },
 
     /**
-     * Add listener for network status changes
+     * Agregar escuchador para cambios en el estado de la red
      */
     addListener(callback: (connected: boolean) => void): void {
         Network.addListener('networkStatusChange', (status) => {
@@ -24,7 +24,7 @@ export const NetworkService = {
     },
 
     /**
-     * Remove all network listeners
+     * Eliminar todos los escuchadores de red
      */
     async removeAllListeners(): Promise<void> {
         await Network.removeAllListeners();

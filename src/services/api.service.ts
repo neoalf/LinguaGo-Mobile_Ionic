@@ -2,13 +2,13 @@ import axios, { AxiosInstance } from 'axios';
 import { User, LoginCredentials, RegisterData, ApiResponse, ProgressUpdate } from '../types/user.types';
 
 /**
- * API Service
- * Handles all HTTP requests to the backend server
+ * Servicio de API
+ * Maneja todas las peticiones HTTP al servidor backend
  */
 
-// Base URL for the backend API
-// For development: localhost
-// For production: replace with your server URL
+// URL base para la API del backend
+// Para desarrollo: localhost
+// Para producción: reemplazar con la URL de tu servidor
 const API_BASE_URL = 'http://localhost:4000';
 
 class ApiService {
@@ -20,10 +20,10 @@ class ApiService {
             headers: {
                 'Content-Type': 'application/json',
             },
-            timeout: 10000, // 10 seconds timeout
+            timeout: 10000, // Tiempo de espera de 10 segundos
         });
 
-        // Request interceptor
+        // Interceptor de peticiones
         this.api.interceptors.request.use(
             (config) => {
                 console.log(`API Request: ${config.method?.toUpperCase()} ${config.url}`);
@@ -35,7 +35,7 @@ class ApiService {
             }
         );
 
-        // Response interceptor
+        // Interceptor de respuestas
         this.api.interceptors.response.use(
             (response) => {
                 console.log(`API Response: ${response.status} ${response.config.url}`);
@@ -49,7 +49,7 @@ class ApiService {
     }
 
     /**
-     * User Registration
+     * Registro de Usuario
      */
     async register(data: RegisterData): Promise<ApiResponse> {
         try {
@@ -61,7 +61,7 @@ class ApiService {
     }
 
     /**
-     * User Login
+     * Inicio de Sesión de Usuario
      */
     async login(credentials: LoginCredentials): Promise<User> {
         try {
@@ -73,7 +73,7 @@ class ApiService {
     }
 
     /**
-     * Update user profile
+     * Actualizar perfil de usuario
      */
     async updateProfile(userId: number, data: Partial<User>): Promise<ApiResponse<User>> {
         try {
@@ -85,7 +85,7 @@ class ApiService {
     }
 
     /**
-     * Update user progress for languages
+     * Actualizar progreso del usuario en idiomas
      */
     async updateProgress(userId: number, progress: ProgressUpdate): Promise<ApiResponse> {
         try {
@@ -97,7 +97,7 @@ class ApiService {
     }
 
     /**
-     * Delete user account
+     * Eliminar cuenta de usuario
      */
     async deleteAccount(userId: number): Promise<ApiResponse> {
         try {
@@ -109,7 +109,7 @@ class ApiService {
     }
 
     /**
-     * Reset password
+     * Restablecer contraseña
      */
     async resetPassword(email: string, newPassword: string): Promise<ApiResponse> {
         try {
@@ -124,5 +124,5 @@ class ApiService {
     }
 }
 
-// Export singleton instance
+// Exportar instancia singleton
 export default new ApiService();
