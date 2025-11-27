@@ -1,4 +1,5 @@
 import axios, { AxiosInstance } from 'axios';
+import { Capacitor } from '@capacitor/core';
 import { User, LoginCredentials, RegisterData, ApiResponse, ProgressUpdate } from '../types/user.types';
 
 /**
@@ -9,7 +10,10 @@ import { User, LoginCredentials, RegisterData, ApiResponse, ProgressUpdate } fro
 // URL base para la API del backend
 // Para desarrollo: localhost
 // Para producción: reemplazar con la URL de tu servidor
-const API_BASE_URL = 'http://localhost:4000';
+// Para Android Emulator: 10.0.2.2
+const API_BASE_URL = Capacitor.getPlatform() === 'android'
+    ? 'http://10.0.2.2:4000'
+    : 'http://localhost:4000';
 
 class ApiService {
     private api: AxiosInstance;
