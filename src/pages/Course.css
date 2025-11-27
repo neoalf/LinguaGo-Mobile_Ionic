@@ -40,6 +40,7 @@
     margin: 1rem;
     border-radius: 15px;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    background: #ffffff;
 }
 
 .progress-header {
@@ -53,6 +54,7 @@
     font-size: 1.2rem;
     font-weight: 600;
     margin: 0;
+    color: #1a1a1a;
 }
 
 .progress-header strong {
@@ -73,13 +75,14 @@
     font-weight: 600;
     margin-bottom: 1rem;
     padding-left: 0.5rem;
-    color: #333;
+    color: #1a1a1a;
 }
 
 .lesson-card {
     margin-bottom: 1rem;
     border-radius: 12px;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+    background: #ffffff;
 }
 
 .lesson-header {
@@ -111,12 +114,12 @@
     font-size: 1.1rem;
     font-weight: 600;
     margin-bottom: 0.3rem;
-    color: #333;
+    color: #1a1a1a;
 }
 
 .lesson-info p {
     font-size: 0.85rem;
-    color: #999;
+    color: #666;
     margin: 0;
 }
 
@@ -134,13 +137,14 @@
     margin: 1rem;
     border-radius: 15px;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    background: #ffffff;
 }
 
 .video-card h3 {
     font-size: 1.2rem;
     font-weight: 600;
     margin-bottom: 1rem;
-    color: #333;
+    color: #1a1a1a;
 }
 
 .video-container {
@@ -148,7 +152,7 @@
     width: 100%;
     border-radius: 12px;
     overflow: hidden;
-    background: #000;
+    background: #e2e0e0;
 }
 
 .course-video {

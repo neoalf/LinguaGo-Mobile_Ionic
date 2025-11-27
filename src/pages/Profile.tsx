@@ -168,7 +168,7 @@ const Profile: React.FC = () => {
                                     <IonSelectOption value="Colombia">Colombia</IonSelectOption>
                                     <IonSelectOption value="España">España</IonSelectOption>
                                     <IonSelectOption value="México">México</IonSelectOption>
-                                    <IonSelectOption value="Perú">Perú</IonSelectOption>
+                                    <IonSelectOption value="Nicaragua">Nicaragua</IonSelectOption>
                                     <IonSelectOption value="Otro">Otro</IonSelectOption>
                                 </IonSelect>
                             ) : (
