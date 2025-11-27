@@ -40,6 +40,7 @@ const Course: React.FC = () => {
             name: 'Inglés',
             description: 'El idioma global. Aprende inglés y comunícate sin fronteras.',
             image: '/assets/img/Britain.png',
+            video: '/assets/video/MIXED CONDITIONALS. Codicionales Mixtos en Ingles.mp4',
             color: 'primary',
             lessons: [
                 { id: 1, title: 'Saludos y Presentaciones', completed: false },
@@ -53,6 +54,7 @@ const Course: React.FC = () => {
             name: 'Francés',
             description: 'El idioma del arte y la cultura. ¡Descubre el encanto francés!',
             image: '/assets/img/France.jpg',
+            video: '/assets/video/CLASE DE FRANCÉS 1.mp4',
             color: 'secondary',
             lessons: [
                 { id: 1, title: 'Salutations et Présentations', completed: false },
@@ -66,6 +68,7 @@ const Course: React.FC = () => {
             name: 'Ruso',
             description: 'Desafiante y poderoso. Expande tu mente aprendiendo ruso.',
             image: '/assets/img/russian.jpeg',
+            video: '/assets/video/ABECEDARIO RUSO.mp4',
             color: 'tertiary',
             lessons: [
                 { id: 1, title: 'Приветствия (Saludos)', completed: false },
@@ -159,6 +162,23 @@ const Course: React.FC = () => {
                         <p>{currentCourse.description}</p>
                     </div>
                 </div>
+
+                {/* Video Section */}
+                <IonCard className="video-card">
+                    <IonCardContent>
+                        <h3>Video del Curso</h3>
+                        <div className="video-container">
+                            <video 
+                                controls 
+                                className="course-video"
+                                poster={currentCourse.image}
+                            >
+                                <source src={currentCourse.video} type="video/mp4" />
+                                Tu navegador no soporta el elemento de video.
+                            </video>
+                        </div>
+                    </IonCardContent>
+                </IonCard>
 
                 {/* Progress Section */}
                 <IonCard className="progress-card">
