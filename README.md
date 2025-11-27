@@ -87,16 +87,7 @@ La URL del backend está configurada en `src/services/api.service.ts`:
 const API_BASE_URL = 'http://localhost:4000';
 ```
 
-Para producción, cambia esto a la URL de tu servidor.
-
-## 📖 Documentación
-
-Ver [walkthrough.md](../walkthrough.md) para documentación completa.
-
 ## 🎓 Proyecto Académico
 
 Este proyecto fue desarrollado como parte de la migración de la aplicación web LinguaGo a plataforma móvil para fines académicos.
-
----
-
-**Desarrollado con ❤️ usando Ionic Framework**
+ Framework**
