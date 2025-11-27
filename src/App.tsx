@@ -8,6 +8,7 @@ import { StatusBar, Style } from '@capacitor/status-bar';
 // Pages
 import Login from './pages/Login';
 import Register from './pages/Register';
+import ForgotPassword from './pages/ForgotPassword';
 import Dashboard from './pages/Dashboard';
 import Profile from './pages/Profile';
 import Course from './pages/Course';
@@ -57,6 +58,9 @@ const AppRoutes: React.FC = () => {
           </Route>
           <Route exact path="/register">
             {isAuthenticated ? <Redirect to="/dashboard" /> : <Register />}
+          </Route>
+          <Route exact path="/forgot-password">
+            <ForgotPassword />
           </Route>
 
           {/* Protected Routes */}

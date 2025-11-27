@@ -91,7 +91,7 @@ const Login: React.FC = () => {
                     {/* Title */}
                     <div className="login-header">
                         <h1>Bienvenido</h1>
-                        <p>Inicia sesión para continuar aprendiendo</p>
+                        <p>Aprende, practica y habla sin límites.</p>
                     </div>
 
                     {/* Login Form */}
@@ -129,7 +129,7 @@ const Login: React.FC = () => {
 
                         {/* Forgot Password */}
                         <div className="forgot-password">
-                            <IonText color="medium">
+                            <IonText color="primary" onClick={() => history.push('/forgot-password')}>
                                 <small>¿Olvidaste tu contraseña?</small>
                             </IonText>
                         </div>

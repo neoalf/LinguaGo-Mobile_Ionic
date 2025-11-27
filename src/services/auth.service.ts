@@ -102,4 +102,15 @@ export const AuthService = {
             throw error;
         }
     },
+
+    /**
+     * Reset user password
+     */
+    async resetPassword(email: string, newPassword: string): Promise<void> {
+        try {
+            await ApiService.resetPassword(email, newPassword);
+        } catch (error: any) {
+            throw error;
+        }
+    },
 };

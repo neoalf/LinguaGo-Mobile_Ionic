@@ -16,7 +16,7 @@
 }
 
 .login-logo img {
-  width: 150px;
+  width: 420px;
   height: auto;
   filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.1));
 }
@@ -86,7 +86,16 @@
 .forgot-password {
   text-align: center;
   margin-top: 1rem;
+}
+
+.forgot-password ion-text {
   cursor: pointer;
+  transition: opacity 0.3s;
+}
+
+.forgot-password ion-text:hover {
+  opacity: 0.7;
+  text-decoration: underline;
 }
 
 .register-link {
