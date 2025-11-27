@@ -23,7 +23,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     const [user, setUser] = useState<User | null>(null);
     const [loading, setLoading] = useState<boolean>(true);
 
-    // Check authentication status on mount
+    // Verificar estado de autenticación al montar
     useEffect(() => {
         checkAuth();
     }, []);

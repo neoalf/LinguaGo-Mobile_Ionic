@@ -1,14 +1,14 @@
-// jest-dom adds custom jest matchers for asserting on DOM nodes.
-// allows you to do things like:
+// jest-dom añade matchers personalizados de jest para hacer aserciones en nodos del DOM.
+// te permite hacer cosas como:
 // expect(element).toHaveTextContent(/react/i)
-// learn more: https://github.com/testing-library/jest-dom
+// aprende más: https://github.com/testing-library/jest-dom
 import '@testing-library/jest-dom/extend-expect';
 
-// Mock matchmedia
-window.matchMedia = window.matchMedia || function() {
+// Mock de matchmedia
+window.matchMedia = window.matchMedia || function () {
   return {
-      matches: false,
-      addListener: function() {},
-      removeListener: function() {}
+    matches: false,
+    addListener: function () { },
+    removeListener: function () { }
   };
 };

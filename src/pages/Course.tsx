@@ -92,7 +92,7 @@ const Course: React.FC = () => {
             history.replace('/login');
         } else {
             setUser(currentUser);
-            // Set progress based on language
+            // Establecer progreso basado en el idioma
             if (language === 'english') setProgress(currentUser.progressEnglish || 0);
             if (language === 'french') setProgress(currentUser.progressFrench || 0);
             if (language === 'russian') setProgress(currentUser.progressRussian || 0);
@@ -154,7 +154,7 @@ const Course: React.FC = () => {
             </IonHeader>
 
             <IonContent className="course-content">
-                {/* Course Header */}
+                {/* Encabezado del Curso */}
                 <div className="course-header">
                     <img src={currentCourse.image} alt={currentCourse.name} />
                     <div className="course-info">
@@ -163,13 +163,13 @@ const Course: React.FC = () => {
                     </div>
                 </div>
 
-                {/* Video Section */}
+                {/* Sección de Video */}
                 <IonCard className="video-card">
                     <IonCardContent>
                         <h3>Video del Curso</h3>
                         <div className="video-container">
-                            <video 
-                                controls 
+                            <video
+                                controls
                                 className="course-video"
                                 poster={currentCourse.image}
                             >
@@ -180,7 +180,7 @@ const Course: React.FC = () => {
                     </IonCardContent>
                 </IonCard>
 
-                {/* Progress Section */}
+                {/* Sección de Progreso */}
                 <IonCard className="progress-card">
                     <IonCardContent>
                         <div className="progress-header">
@@ -195,7 +195,7 @@ const Course: React.FC = () => {
                     </IonCardContent>
                 </IonCard>
 
-                {/* Lessons Section */}
+                {/* Sección de Lecciones */}
                 <div className="lessons-section">
                     <h3>Lecciones</h3>
 

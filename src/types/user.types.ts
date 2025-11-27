@@ -1,10 +1,10 @@
-// Type definitions for LinguaGo Mobile App
+// Definiciones de tipos para la App Móvil LinguaGo
 
 export interface User {
     id: number;
     name: string;
     email: string;
-    password?: string; // Not returned from API
+    password?: string; // No devuelto por la API
     country: string;
     avatar: string;
     level: string;

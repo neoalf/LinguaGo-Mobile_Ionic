@@ -103,7 +103,7 @@ const Register: React.FC = () => {
                 country: formData.country,
             });
 
-            // Get the newly created user and update auth context
+            // Obtener el usuario recién creado y actualizar el contexto de autenticación
             const user = await AuthService.getCurrentUser();
             if (user) {
                 setAuthUser(user);
@@ -115,7 +115,7 @@ const Register: React.FC = () => {
                 color: 'success',
             });
 
-            // Navigate to dashboard after short delay
+            // Navegar al panel después de un breve retraso
             setTimeout(() => {
                 history.replace('/dashboard');
             }, 1000);
@@ -139,15 +139,15 @@ const Register: React.FC = () => {
                         <img src="/assets/img/LinguaGo logo - Edited.png" alt="LinguaGo" />
                     </div>
 
-                    {/* Title */}
+                    {/* Título */}
                     <div className="register-header">
                         <h1>Crear Cuenta</h1>
                         <p>Únete a LinguaGo y comienza a aprender</p>
                     </div>
 
-                    {/* Register Form */}
+                    {/* Formulario de Registro */}
                     <form onSubmit={handleRegister} className="register-form">
-                        {/* Name Input */}
+                        {/* Entrada de Nombre */}
                         <div className="input-group">
                             <IonIcon icon={personOutline} className="input-icon" />
                             <IonInput
@@ -159,7 +159,7 @@ const Register: React.FC = () => {
                             />
                         </div>
 
-                        {/* Email Input */}
+                        {/* Entrada de Correo Electrónico */}
                         <div className="input-group">
                             <IonIcon icon={mailOutline} className="input-icon" />
                             <IonInput
@@ -171,7 +171,7 @@ const Register: React.FC = () => {
                             />
                         </div>
 
-                        {/* Country Select */}
+                        {/* Selección de País */}
                         <div className="input-group">
                             <IonIcon icon={globeOutline} className="input-icon" />
                             <IonSelect
@@ -201,7 +201,7 @@ const Register: React.FC = () => {
                             </IonSelect>
                         </div>
 
-                        {/* Password Input */}
+                        {/* Entrada de Contraseña */}
                         <div className="input-group">
                             <IonIcon icon={lockClosedOutline} className="input-icon" />
                             <IonInput
@@ -215,7 +215,7 @@ const Register: React.FC = () => {
                             </IonInput>
                         </div>
 
-                        {/* Confirm Password Input */}
+                        {/* Entrada de Confirmación de Contraseña */}
                         <div className="input-group">
                             <IonIcon icon={lockClosedOutline} className="input-icon" />
                             <IonInput
@@ -229,12 +229,12 @@ const Register: React.FC = () => {
                             </IonInput>
                         </div>
 
-                        {/* Register Button */}
+                        {/* Botón de Registro */}
                         <IonButton expand="block" type="submit" className="register-button">
                             Crear Cuenta
                         </IonButton>
 
-                        {/* Login Link */}
+                        {/* Enlace de Inicio de Sesión */}
                         <div className="login-link">
                             <IonText color="medium">
                                 ¿Ya tienes cuenta?{' '}
@@ -246,10 +246,10 @@ const Register: React.FC = () => {
                     </form>
                 </div>
 
-                {/* Loading Spinner */}
+                {/* Indicador de Carga */}
                 <IonLoading isOpen={loading} message="Creando cuenta..." />
 
-                {/* Toast Notifications */}
+                {/* Notificaciones Toast */}
                 <IonToast
                     isOpen={toast.show}
                     message={toast.message}

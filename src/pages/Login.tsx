@@ -31,7 +31,7 @@ const Login: React.FC = () => {
     const handleLogin = async (e: React.FormEvent) => {
         e.preventDefault();
 
-        // Validation
+        // Validación
         if (!email || !password) {
             setToast({
                 show: true,
@@ -55,7 +55,7 @@ const Login: React.FC = () => {
         try {
             const user = await AuthService.login({ email, password });
 
-            // Update auth context - this triggers the redirect
+            // Actualizar contexto de autenticación - esto activa la redirección
             setAuthUser(user);
 
             setToast({
@@ -64,7 +64,7 @@ const Login: React.FC = () => {
                 color: 'success',
             });
 
-            // Navigate to dashboard after short delay
+            // Navegar al panel después de un breve retraso
             setTimeout(() => {
                 history.replace('/dashboard');
             }, 1000);
@@ -88,15 +88,15 @@ const Login: React.FC = () => {
                         <img src="/assets/img/LinguaGo logo - Edited.png" alt="LinguaGo" />
                     </div>
 
-                    {/* Title */}
+                    {/* Título */}
                     <div className="login-header">
                         <h1>Bienvenido</h1>
                         <p>Aprende, practica y habla sin límites.</p>
                     </div>
 
-                    {/* Login Form */}
+                    {/* Formulario de Inicio de Sesión */}
                     <form onSubmit={handleLogin} className="login-form">
-                        {/* Email Input */}
+                        {/* Entrada de Correo Electrónico */}
                         <div className="input-group">
                             <IonIcon icon={mailOutline} className="input-icon" />
                             <IonInput
@@ -108,7 +108,7 @@ const Login: React.FC = () => {
                             />
                         </div>
 
-                        {/* Password Input */}
+                        {/* Entrada de Contraseña */}
                         <div className="input-group">
                             <IonIcon icon={lockClosedOutline} className="input-icon" />
                             <IonInput
@@ -122,19 +122,19 @@ const Login: React.FC = () => {
                             </IonInput>
                         </div>
 
-                        {/* Login Button */}
+                        {/* Botón de Inicio de Sesión */}
                         <IonButton expand="block" type="submit" className="login-button">
                             Iniciar Sesión
                         </IonButton>
 
-                        {/* Forgot Password */}
+                        {/* Olvidé mi Contraseña */}
                         <div className="forgot-password">
                             <IonText color="primary" onClick={() => history.push('/forgot-password')}>
                                 <small>¿Olvidaste tu contraseña?</small>
                             </IonText>
                         </div>
 
-                        {/* Register Link */}
+                        {/* Enlace de Registro */}
                         <div className="register-link">
                             <IonText color="medium">
                                 ¿No tienes cuenta?{' '}
@@ -146,10 +146,10 @@ const Login: React.FC = () => {
                     </form>
                 </div>
 
-                {/* Loading Spinner */}
+                {/* Indicador de Carga */}
                 <IonLoading isOpen={loading} message="Iniciando sesión..." />
 
-                {/* Toast Notifications */}
+                {/* Notificaciones Toast */}
                 <IonToast
                     isOpen={toast.show}
                     message={toast.message}

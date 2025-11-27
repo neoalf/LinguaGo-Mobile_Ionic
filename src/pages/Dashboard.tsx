@@ -35,7 +35,7 @@ const Dashboard: React.FC = () => {
     }, [authUser]);
 
     const handleRefresh = async (event: CustomEvent) => {
-        // User data is already managed by AuthContext
+        // Los datos del usuario ya son gestionados por AuthContext
         event.detail.complete();
     };
 
@@ -84,7 +84,7 @@ const Dashboard: React.FC = () => {
                     <IonRefresherContent />
                 </IonRefresher>
 
-                {/* User Profile Section */}
+                {/* Sección de Perfil de Usuario */}
                 <div className="user-section">
                     <IonAvatar className="user-avatar">
                         <img src={user?.avatar || '/assets/img/default-avatar-profile-icon.jpg'} alt="Avatar" />
@@ -104,7 +104,7 @@ const Dashboard: React.FC = () => {
                     </div>
                 </div>
 
-                {/* Courses Section */}
+                {/* Sección de Cursos */}
                 <div className="courses-section">
                     <h3>
                         <IonIcon icon={bookOutline} /> Tus Cursos

@@ -30,7 +30,7 @@ const ForgotPassword: React.FC = () => {
     const handleResetPassword = async (e: React.FormEvent) => {
         e.preventDefault();
 
-        // Validation
+        // Validación
         if (!email || !newPassword || !confirmPassword) {
             setToast({
                 show: true,
@@ -78,7 +78,7 @@ const ForgotPassword: React.FC = () => {
                 color: 'success',
             });
 
-            // Redirect to login after success
+            // Redirigir al inicio de sesión después del éxito
             setTimeout(() => {
                 history.replace('/login');
             }, 2000);
@@ -97,7 +97,7 @@ const ForgotPassword: React.FC = () => {
         <IonPage>
             <IonContent className="forgot-password-content">
                 <div className="forgot-password-container">
-                    {/* Back Button */}
+                    {/* Botón de Volver */}
                     <div className="back-button" onClick={() => history.push('/login')}>
                         <IonIcon icon={arrowBackOutline} />
                         <span>Volver</span>
@@ -108,15 +108,15 @@ const ForgotPassword: React.FC = () => {
                         <img src="/assets/img/LinguaGo logo - Edited.png" alt="LinguaGo" />
                     </div>
 
-                    {/* Title */}
+                    {/* Título */}
                     <div className="forgot-password-header">
                         <h1>Restablecer Contraseña</h1>
                         <p>Ingresa tu email y tu nueva contraseña</p>
                     </div>
 
-                    {/* Reset Password Form */}
+                    {/* Formulario de Restablecimiento de Contraseña */}
                     <form onSubmit={handleResetPassword} className="forgot-password-form">
-                        {/* Email Input */}
+                        {/* Entrada de Correo Electrónico */}
                         <div className="input-group">
                             <IonIcon icon={mailOutline} className="input-icon" />
                             <IonInput
@@ -128,7 +128,7 @@ const ForgotPassword: React.FC = () => {
                             />
                         </div>
 
-                        {/* New Password Input */}
+                        {/* Entrada de Nueva Contraseña */}
                         <div className="input-group">
                             <IonIcon icon={lockClosedOutline} className="input-icon" />
                             <IonInput
@@ -142,7 +142,7 @@ const ForgotPassword: React.FC = () => {
                             </IonInput>
                         </div>
 
-                        {/* Confirm Password Input */}
+                        {/* Entrada de Confirmación de Contraseña */}
                         <div className="input-group">
                             <IonIcon icon={lockClosedOutline} className="input-icon" />
                             <IonInput
@@ -156,12 +156,12 @@ const ForgotPassword: React.FC = () => {
                             </IonInput>
                         </div>
 
-                        {/* Submit Button */}
+                        {/* Botón de Envío */}
                         <IonButton expand="block" type="submit" className="reset-button">
                             Restablecer Contraseña
                         </IonButton>
 
-                        {/* Login Link */}
+                        {/* Enlace de Inicio de Sesión */}
                         <div className="login-link">
                             <IonText color="medium">
                                 ¿Recordaste tu contraseña?{' '}
@@ -173,10 +173,10 @@ const ForgotPassword: React.FC = () => {
                     </form>
                 </div>
 
-                {/* Loading Spinner */}
+                {/* Indicador de Carga */}
                 <IonLoading isOpen={loading} message="Restableciendo contraseña..." />
 
-                {/* Toast Notifications */}
+                {/* Notificaciones Toast */}
                 <IonToast
                     isOpen={toast.show}
                     message={toast.message}
