@@ -1,4 +1,6 @@
+// Importaciones de React y hooks
 import React, { useState } from 'react';
+// Importaciones de componentes de Ionic
 import {
     IonContent,
     IonPage,
@@ -12,15 +14,24 @@ import {
     IonSelectOption,
     IonInputPasswordToggle,
 } from '@ionic/react';
+// Importación de iconos
 import { mailOutline, lockClosedOutline, personOutline, globeOutline } from 'ionicons/icons';
+// Importación de React Router para navegación
 import { useHistory } from 'react-router-dom';
+// Importación del servicio de autenticación
 import { AuthService } from '../services/auth.service';
+// Importación del contexto de autenticación
 import { useAuth } from '../contexts/AuthContext';
+// Importación de estilos CSS
 import './Register.css';
 
+// Componente de página de registro de usuario
 const Register: React.FC = () => {
+    // Hook para navegación
     const history = useHistory();
+    // Obtener función de login del contexto de autenticación
     const { login: setAuthUser } = useAuth();
+    // Estado para los datos del formulario de registro
     const [formData, setFormData] = useState({
         name: '',
         email: '',
@@ -28,18 +39,23 @@ const Register: React.FC = () => {
         confirmPassword: '',
         country: '',
     });
+    // Estado para indicador de carga
     const [loading, setLoading] = useState(false);
+    // Estado para mensajes toast (notificaciones)
     const [toast, setToast] = useState<{ show: boolean; message: string; color: string }>({
         show: false,
         message: '',
         color: 'danger',
     });
 
+    // Función para manejar cambios en los campos del formulario
     const handleInputChange = (field: string, value: string) => {
         setFormData({ ...formData, [field]: value });
     };
 
+    // Función para validar el formulario de registro
     const validateForm = (): boolean => {
+        // Validación: verificar que todos los campos obligatorios estén completos
         if (!formData.name || !formData.email || !formData.password || !formData.confirmPassword) {
             setToast({
                 show: true,
@@ -49,6 +65,7 @@ const Register: React.FC = () => {
             return false;
         }
 
+        // Validación: verificar longitud mínima del nombre
         if (formData.name.length < 2) {
             setToast({
                 show: true,
@@ -58,6 +75,7 @@ const Register: React.FC = () => {
             return false;
         }
 
+        // Validación: verificar formato de email
         if (!formData.email.includes('@')) {
             setToast({
                 show: true,
@@ -67,6 +85,7 @@ const Register: React.FC = () => {
             return false;
         }
 
+        // Validación: verificar longitud mínima de contraseña
         if (formData.password.length < 8) {
             setToast({
                 show: true,
@@ -76,6 +95,7 @@ const Register: React.FC = () => {
             return false;
         }
 
+        // Validación: verificar que las contraseñas coincidan
         if (formData.password !== formData.confirmPassword) {
             setToast({
                 show: true,
@@ -88,14 +108,17 @@ const Register: React.FC = () => {
         return true;
     };
 
+    // Función para manejar el registro de usuario
     const handleRegister = async (e: React.FormEvent) => {
         e.preventDefault();
 
+        // Validar el formulario antes de continuar
         if (!validateForm()) return;
 
         setLoading(true);
 
         try {
+            // Registrar el nuevo usuario
             await AuthService.register({
                 name: formData.name,
                 email: formData.email,

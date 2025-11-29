@@ -1,5 +1,8 @@
+// Importación de tipos personalizados para autenticación
 import { User, LoginCredentials, RegisterData } from '../types/user.types';
+// Importación del servicio de API para peticiones HTTP
 import ApiService from './api.service';
+// Importación del servicio de almacenamiento local
 import { StorageService } from './storage.service';
 
 /**

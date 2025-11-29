@@ -1,7 +1,10 @@
+// Importación de estilos CSS
 import './ExploreContainer.css';
 
+// Interfaz de props del componente (vacía en este caso)
 interface ContainerProps { }
 
+// Componente de contenedor de exploración (plantilla por defecto de Ionic)
 const ExploreContainer: React.FC<ContainerProps> = () => {
   return (
     <div id="container">

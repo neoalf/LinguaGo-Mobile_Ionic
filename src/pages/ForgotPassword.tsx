@@ -1,4 +1,6 @@
+// Importaciones de React y hooks
 import React, { useState } from 'react';
+// Importaciones de componentes de Ionic
 import {
     IonContent,
     IonPage,
@@ -10,27 +12,37 @@ import {
     IonLoading,
     IonInputPasswordToggle,
 } from '@ionic/react';
+// Importación de iconos
 import { mailOutline, lockClosedOutline, arrowBackOutline } from 'ionicons/icons';
+// Importación de React Router para navegación
 import { useHistory } from 'react-router-dom';
+// Importación del servicio de autenticación
 import { AuthService } from '../services/auth.service';
+// Importación de estilos CSS
 import './ForgotPassword.css';
 
+// Componente para restablecer contraseña olvidada
 const ForgotPassword: React.FC = () => {
+    // Hook para navegación
     const history = useHistory();
+    // Estados para los campos del formulario
     const [email, setEmail] = useState('');
     const [newPassword, setNewPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
+    // Estado para indicador de carga
     const [loading, setLoading] = useState(false);
+    // Estado para mensajes toast (notificaciones)
     const [toast, setToast] = useState<{ show: boolean; message: string; color: string }>({
         show: false,
         message: '',
         color: 'danger',
     });
 
+    // Función para manejar el restablecimiento de contraseña
     const handleResetPassword = async (e: React.FormEvent) => {
         e.preventDefault();
 
-        // Validación
+        // Validación: verificar que todos los campos estén completos
         if (!email || !newPassword || !confirmPassword) {
             setToast({
                 show: true,
@@ -40,6 +52,7 @@ const ForgotPassword: React.FC = () => {
             return;
         }
 
+        // Validación: verificar formato de email
         if (!email.includes('@')) {
             setToast({
                 show: true,
@@ -49,6 +62,7 @@ const ForgotPassword: React.FC = () => {
             return;
         }
 
+        // Validación: verificar longitud mínima de contraseña
         if (newPassword.length < 6) {
             setToast({
                 show: true,
@@ -58,6 +72,7 @@ const ForgotPassword: React.FC = () => {
             return;
         }
 
+        // Validación: verificar que las contraseñas coincidan
         if (newPassword !== confirmPassword) {
             setToast({
                 show: true,
@@ -70,6 +85,7 @@ const ForgotPassword: React.FC = () => {
         setLoading(true);
 
         try {
+            // Llamar al servicio para restablecer la contraseña
             await AuthService.resetPassword(email, newPassword);
 
             setToast({

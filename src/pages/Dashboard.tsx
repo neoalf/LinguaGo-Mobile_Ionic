@@ -1,4 +1,6 @@
+// Importaciones de React y hooks
 import React, { useState, useEffect } from 'react';
+// Importaciones de componentes de Ionic
 import {
     IonContent,
     IonPage,
@@ -17,33 +19,46 @@ import {
     IonRefresher,
     IonRefresherContent,
 } from '@ionic/react';
+// Importación de iconos
 import { personCircleOutline, logOutOutline, bookOutline } from 'ionicons/icons';
+// Importación de React Router para navegación
 import { useHistory } from 'react-router-dom';
+// Importación del contexto de autenticación
 import { useAuth } from '../contexts/AuthContext';
+// Importación de tipos de usuario
 import { User } from '../types/user.types';
+// Importación de estilos CSS
 import './Dashboard.css';
 
+// Componente principal del Dashboard
 const Dashboard: React.FC = () => {
+    // Hook para navegación
     const history = useHistory();
+    // Obtener usuario y función de logout del contexto de autenticación
     const { user: authUser, logout: authLogout } = useAuth();
+    // Estado local del usuario
     const [user, setUser] = useState<User | null>(authUser);
 
+    // Efecto para sincronizar el estado local con el contexto de autenticación
     useEffect(() => {
         if (authUser) {
             setUser(authUser);
         }
     }, [authUser]);
 
+    // Función para manejar el refresco de la página (pull-to-refresh)
     const handleRefresh = async (event: CustomEvent) => {
         // Los datos del usuario ya son gestionados por AuthContext
         event.detail.complete();
     };
 
+    // Función para manejar el cierre de sesión
     const handleLogout = async () => {
         await authLogout();
         history.replace('/login');
     };
 
+    // Datos de los cursos disponibles con su progreso
     const courses = [
         {
             id: 'english',
@@ -71,8 +86,10 @@ const Dashboard: React.FC = () => {
         },
     ];
 
+    // Renderizar la página del Dashboard
     return (
         <IonPage>
+            {/* Encabezado de la página */}
             <IonHeader>
                 <IonToolbar color="primary">
                     <IonTitle>LinguaGo</IonTitle>

@@ -1,7 +1,10 @@
+// Importaciones de React y React Router
 import React, { useEffect } from 'react';
 import { Redirect, Route } from 'react-router-dom';
+// Importaciones de Ionic React
 import { IonApp, IonRouterOutlet, setupIonicReact } from '@ionic/react';
 import { IonReactRouter } from '@ionic/react-router';
+// Importaciones de Capacitor para funcionalidades nativas
 import { SplashScreen } from '@capacitor/splash-screen';
 import { StatusBar, Style } from '@capacitor/status-bar';
 
@@ -38,9 +41,12 @@ import '@ionic/react/css/palettes/dark.system.css';
 /* Variables de tema */
 import './theme/variables.css';
 
+// Configurar Ionic React con opciones por defecto
 setupIonicReact();
 
+// Componente de rutas de la aplicación
 const AppRoutes: React.FC = () => {
+  // Obtener estado de autenticación del contexto
   const { isAuthenticated, loading } = useAuth();
 
   // Mostrar carga mientras se verifica la autenticación
@@ -48,6 +54,7 @@ const AppRoutes: React.FC = () => {
     return <IonApp></IonApp>;
   }
 
+  // Renderizar la aplicación con rutas
   return (
     <IonApp>
       <IonReactRouter>
@@ -84,11 +91,14 @@ const AppRoutes: React.FC = () => {
   );
 };
 
+// Componente principal de la aplicación
 const App: React.FC = () => {
+  // Efecto para inicializar la aplicación al montar
   useEffect(() => {
     initializeApp();
   }, []);
 
+  // Función para inicializar configuraciones nativas de la app
   const initializeApp = async () => {
     // Ocultar pantalla de carga
     await SplashScreen.hide();
@@ -101,6 +111,7 @@ const App: React.FC = () => {
     }
   };
 
+  // Renderizar la aplicación envuelta en el proveedor de autenticación
   return (
     <AuthProvider>
       <AppRoutes />

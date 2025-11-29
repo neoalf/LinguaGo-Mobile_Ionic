@@ -1,4 +1,6 @@
+// Importaciones de React y hooks necesarios
 import React, { useState, useEffect } from 'react';
+// Importaciones de componentes de Ionic para la interfaz de usuario
 import {
     IonContent,
     IonPage,
@@ -15,26 +17,39 @@ import {
     IonIcon,
     IonToast,
 } from '@ionic/react';
+// Importación de iconos de Ionicons
 import { checkmarkCircleOutline } from 'ionicons/icons';
+// Importaciones de React Router para navegación y parámetros de URL
 import { useHistory, useParams } from 'react-router-dom';
+// Importación del servicio de autenticación
 import { AuthService } from '../services/auth.service';
+// Importación de tipos de usuario
 import { User } from '../types/user.types';
+// Importación de estilos CSS del componente
 import './Course.css';
 
+// Interfaz para los parámetros de la URL del curso
 interface CourseParams {
-    language: string;
+    language: string; // Idioma del curso (english, french, russian)
 }
 
+// Componente principal de la página de curso
 const Course: React.FC = () => {
+    // Hook para navegación programática
     const history = useHistory();
+    // Obtener el parámetro de idioma de la URL
     const { language } = useParams<CourseParams>();
+    // Estado para almacenar la información del usuario actual
     const [user, setUser] = useState<User | null>(null);
+    // Estado para el progreso del curso (0-100)
     const [progress, setProgress] = useState(0);
+    // Estado para mostrar mensajes toast (notificaciones)
     const [toast, setToast] = useState<{ show: boolean; message: string }>({
         show: false,
         message: '',
     });
 
+    // Datos de los cursos disponibles (inglés, francés, ruso)
     const courseData: Record<string, any> = {
         english: {
             name: 'Inglés',
@@ -80,14 +95,18 @@ const Course: React.FC = () => {
         },
     };
 
+    // Obtener los datos del curso actual basado en el idioma de la URL
     const currentCourse = courseData[language];
 
+    // Efecto que se ejecuta al montar el componente para cargar el usuario
     useEffect(() => {
         loadUser();
     }, []);
 
+    // Función para cargar el usuario actual y su progreso
     const loadUser = async () => {
         const currentUser = await AuthService.getCurrentUser();
+        // Si no hay usuario autenticado, redirigir al login
         if (!currentUser) {
             history.replace('/login');
         } else {
@@ -99,18 +118,22 @@ const Course: React.FC = () => {
         }
     };
 
+    // Función para manejar la completación de una lección
     const handleCompleteLesson = async () => {
         if (!user) return;
 
+        // Incrementar el progreso en 20% (máximo 100%)
         const newProgress = Math.min(progress + 20, 100);
         setProgress(newProgress);
 
         try {
+            // Preparar el objeto de actualización de progreso según el idioma
             const progressUpdate: any = {};
             if (language === 'english') progressUpdate.progressEnglish = newProgress;
             if (language === 'french') progressUpdate.progressFrench = newProgress;
             if (language === 'russian') progressUpdate.progressRussian = newProgress;
 
+            // Actualizar el progreso en el backend
             await AuthService.updateProgress(
                 user.id,
                 progressUpdate.progressEnglish,
@@ -118,6 +141,7 @@ const Course: React.FC = () => {
                 progressUpdate.progressRussian
             );
 
+            // Mostrar mensaje de éxito
             setToast({
                 show: true,
                 message: '¡Lección completada! +20% de progreso',
@@ -127,6 +151,7 @@ const Course: React.FC = () => {
         }
     };
 
+    // Si el curso no existe, mostrar mensaje de error
     if (!currentCourse) {
         return (
             <IonPage>
@@ -142,8 +167,10 @@ const Course: React.FC = () => {
         );
     }
 
+    // Renderizar la página del curso
     return (
         <IonPage>
+            {/* Encabezado con botón de retroceso y título del curso */}
             <IonHeader>
                 <IonToolbar color={currentCourse.color}>
                     <IonButtons slot="start">

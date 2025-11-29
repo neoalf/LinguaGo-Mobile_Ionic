@@ -1,4 +1,6 @@
+// Importación del plugin de preferencias de Capacitor para almacenamiento local
 import { Preferences } from '@capacitor/preferences';
+// Importación de tipos de usuario
 import { User } from '../types/user.types';
 
 /**
@@ -6,10 +8,11 @@ import { User } from '../types/user.types';
  * Maneja la persistencia de datos locales usando Capacitor Preferences
  */
 
+// Claves de almacenamiento utilizadas en la aplicación
 const STORAGE_KEYS = {
-    USER: 'linguago_user',
-    TOKEN: 'linguago_token',
-    IS_LOGGED_IN: 'linguago_is_logged_in',
+    USER: 'linguago_user',           // Clave para datos del usuario
+    TOKEN: 'linguago_token',         // Clave para token de autenticación
+    IS_LOGGED_IN: 'linguago_is_logged_in',  // Clave para estado de sesión
 };
 
 export const StorageService = {

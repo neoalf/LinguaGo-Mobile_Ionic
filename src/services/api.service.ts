@@ -1,5 +1,8 @@
+// Importaciones de Axios para realizar peticiones HTTP
 import axios, { AxiosInstance } from 'axios';
+// Importación de Capacitor para detectar la plataforma
 import { Capacitor } from '@capacitor/core';
+// Importación de tipos personalizados para la API
 import { User, LoginCredentials, RegisterData, ApiResponse, ProgressUpdate } from '../types/user.types';
 
 /**
@@ -9,15 +12,18 @@ import { User, LoginCredentials, RegisterData, ApiResponse, ProgressUpdate } fro
 
 // URL base para la API del backend
 // Para desarrollo: localhost
-// Para producción: reemplazar con la URL de tu servidor
+// Para producción: reemplazar con la URL del servidor
 // Para Android Emulator: 10.0.2.2
 const API_BASE_URL = Capacitor.getPlatform() === 'android'
     ? 'http://10.0.2.2:4000'
     : 'http://localhost:4000';
 
+// Clase de servicio de API para gestionar todas las peticiones HTTP
 class ApiService {
+    // Instancia de Axios configurada para la API
     private api: AxiosInstance;
 
+    // Constructor: inicializa la instancia de Axios con configuración base
     constructor() {
         this.api = axios.create({
             baseURL: API_BASE_URL,

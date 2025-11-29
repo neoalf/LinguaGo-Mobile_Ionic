@@ -1,4 +1,6 @@
+// Importaciones de React y hooks
 import React, { useState } from 'react';
+// Importaciones de componentes de Ionic
 import {
     IonContent,
     IonPage,
@@ -10,28 +12,40 @@ import {
     IonLoading,
     IonInputPasswordToggle,
 } from '@ionic/react';
+// Importación de iconos
 import { mailOutline, lockClosedOutline, personOutline } from 'ionicons/icons';
+// Importación de React Router para navegación
 import { useHistory } from 'react-router-dom';
+// Importación del servicio de autenticación
 import { AuthService } from '../services/auth.service';
+// Importación del contexto de autenticación
 import { useAuth } from '../contexts/AuthContext';
+// Importación de estilos CSS
 import './Login.css';
 
+// Componente de página de inicio de sesión
 const Login: React.FC = () => {
+    // Hook para navegación
     const history = useHistory();
+    // Obtener función de login del contexto de autenticación
     const { login: setAuthUser } = useAuth();
+    // Estados para los campos del formulario
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    // Estado para indicador de carga
     const [loading, setLoading] = useState(false);
+    // Estado para mensajes toast (notificaciones)
     const [toast, setToast] = useState<{ show: boolean; message: string; color: string }>({
         show: false,
         message: '',
         color: 'danger',
     });
 
+    // Función para manejar el inicio de sesión
     const handleLogin = async (e: React.FormEvent) => {
         e.preventDefault();
 
-        // Validación
+        // Validación: verificar que todos los campos estén completos
         if (!email || !password) {
             setToast({
                 show: true,
@@ -41,6 +55,7 @@ const Login: React.FC = () => {
             return;
         }
 
+        // Validación: verificar formato de email
         if (!email.includes('@')) {
             setToast({
                 show: true,
@@ -53,6 +68,7 @@ const Login: React.FC = () => {
         setLoading(true);
 
         try {
+            // Intentar iniciar sesión con el servicio de autenticación
             const user = await AuthService.login({ email, password });
 
             // Actualizar contexto de autenticación - esto activa la redirección

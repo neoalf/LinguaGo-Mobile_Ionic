@@ -1,4 +1,6 @@
+// Importaciones de React y hooks
 import React, { useState, useEffect } from 'react';
+// Importaciones de componentes de Ionic
 import {
     IonContent,
     IonPage,
@@ -20,29 +22,44 @@ import {
     IonText,
     IonProgressBar,
 } from '@ionic/react';
+// Importación de iconos
 import { saveOutline, personOutline, mailOutline, globeOutline } from 'ionicons/icons';
+// Importación de React Router para navegación
 import { useHistory } from 'react-router-dom';
+// Importación del servicio de autenticación
 import { AuthService } from '../services/auth.service';
+// Importación del contexto de autenticación
 import { useAuth } from '../contexts/AuthContext';
+// Importación de tipos de usuario
 import { User } from '../types/user.types';
+// Importación de estilos CSS
 import './Profile.css';
 
+// Componente de página de perfil de usuario
 const Profile: React.FC = () => {
+    // Hook para navegación
     const history = useHistory();
+    // Obtener usuario y función de actualización del contexto de autenticación
     const { user: authUser, updateUser: updateAuthUser } = useAuth();
+    // Estado local del usuario
     const [user, setUser] = useState<User | null>(authUser);
+    // Estado para controlar el modo de edición
     const [editMode, setEditMode] = useState(false);
+    // Estado para los datos del formulario de edición
     const [formData, setFormData] = useState({
         name: authUser?.name || '',
         country: authUser?.country || '',
     });
+    // Estado para indicador de carga
     const [loading, setLoading] = useState(false);
+    // Estado para mensajes toast (notificaciones)
     const [toast, setToast] = useState<{ show: boolean; message: string; color: string }>({
         show: false,
         message: '',
         color: 'success',
     });
 
+    // Efecto para sincronizar el estado local con el contexto de autenticación
     useEffect(() => {
         if (authUser) {
             setUser(authUser);
@@ -53,9 +70,11 @@ const Profile: React.FC = () => {
         }
     }, [authUser]);
 
+    // Función para guardar los cambios del perfil
     const handleSave = async () => {
         if (!user) return;
 
+        // Validación: verificar longitud mínima del nombre
         if (formData.name.trim().length < 2) {
             setToast({
                 show: true,
@@ -68,11 +87,13 @@ const Profile: React.FC = () => {
         setLoading(true);
 
         try {
+            // Actualizar el perfil en el backend
             const updatedUser = await AuthService.updateProfile(user.id, {
                 name: formData.name,
                 country: formData.country,
             });
 
+            // Actualizar estados locales y contexto de autenticación
             setUser(updatedUser);
             updateAuthUser(updatedUser); // Update auth context
             setEditMode(false);
@@ -92,6 +113,7 @@ const Profile: React.FC = () => {
         }
     };
 
+    // Función para cancelar la edición y restaurar los valores originales
     const handleCancel = () => {
         if (user) {
             setFormData({

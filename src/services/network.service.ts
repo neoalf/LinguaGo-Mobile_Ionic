@@ -1,3 +1,4 @@
+// Importación del plugin de red de Capacitor
 import { Network } from '@capacitor/network';
 
 /**
